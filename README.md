@@ -1,59 +1,38 @@
-# RegistroEstudiantes
+# Registro de Estudiantes
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.0.
+Aplicación CRUD en Angular conectada a Firebase para gestionar el registro de estudiantes y sus cursos.
 
-## Development server
+## Objetivo
 
-To start a local development server, run:
+Permitir registrar estudiantes, asociarlos a cursos, consultar sus datos y aplicar filtros y operaciones básicas de gestión.
 
-```bash
-ng serve
-```
+## Tecnologías
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- Angular 20 (standalone)
+- Firebase (Firestore, Authentication)
+- AngularFire
+- TypeScript
+- HTML, SCSS
+## Vistas previstas (componentes de página)
 
-## Code scaffolding
+1. Inicio
+   - Resumen general y navegación principal.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+2. Estudiantes
+   - Listado de estudiantes.
+   - Búsqueda y filtros.
+   - Acceso a detalle y edición.
 
-```bash
-ng generate component component-name
-```
+3. Estudiante Detalle
+   - Ver y editar datos de un estudiante.
+   - Mostrar curso asociado.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+4. Cursos
+   - Listado de cursos.
+   - CRUD básico.
 
-```bash
-ng generate --help
-```
+5. Login
+   - Autenticación con Firebase Authentication.
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+6. Registro de usuario
+   - Crear cuenta de usuario para acceder a la aplicación.
