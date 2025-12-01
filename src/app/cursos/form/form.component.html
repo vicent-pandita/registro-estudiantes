@@ -1,0 +1,20 @@
+<div class="container mt-4" style="max-width: 600px;">
+  <h2>{{ id ? 'Editar Curso' : 'Nuevo Curso' }}</h2>
+
+  <form [formGroup]="form" (ngSubmit)="guardar()">
+
+    <div class="mb-3">
+      <label>Nombre</label>
+      <input class="form-control" type="text" formControlName="nombre">
+    </div>
+
+    <div class="mb-3">
+      <label>Descripción</label>
+      <textarea class="form-control" formControlName="descripcion"></textarea>
+    </div>
+
+    <button class="btn btn-primary">Guardar</button>
+    <button type="button" routerLink="/cursos" class="btn btn-secondary ms-2">Cancelar</button>
+
+  </form>
+</div>

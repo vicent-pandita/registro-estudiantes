@@ -1,1 +1,207 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  font-family: Arial, sans-serif;
+  background: #f8f9fa;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 32px;
+}
+
+/* NAV BAR ANTIGUO (NO SE USA MÁS PERO NO ESTORBA) */
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 20px 0;
+}
+
+nav a {
+  color: #0077cc;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* --- EFECTO FADE-IN GLOBAL PARA TODAS LAS PÁGINAS --- */
+.page {
+  animation: fadePage 0.6s ease;
+}
+
+@keyframes fadePage {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ======== NAVBAR STICKY ======== */
+.topbar {
+  position: sticky;
+  top: 0;
+  background: #ffffffcc;
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+  z-index: 100;
+}
+
+.topbar a {
+  text-decoration: none;
+  font-size: 18px;
+  color: #0077cc;
+  font-weight: 500;
+}
+
+.topbar a:hover {
+  color: #005999;
+}
+
+/* ======== BOTÓN MODO OSCURO ======== */
+.dark-toggle {
+  margin-left: 20px;
+  border: none;
+  background: #eee;
+  font-size: 18px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.dark-toggle:hover {
+  background: #ddd;
+}
+
+/* ======== DARK MODE ======== */
+body.dark {
+  background: #1e1e1e;
+  color: white;
+}
+
+body.dark .topbar {
+  background: #000000cc;
+  border-bottom-color: #444;
+}
+
+body.dark a {
+  color: #9dcaff;
+}
+
+body.dark a:hover {
+  color: #d6e7ff;
+}
+.page-actions {
+  margin: 10px 0 20px;
+}
+
+.list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.row-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-primary,
+.btn-secondary,
+.btn-danger {
+  border: none;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: #2563eb;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #1d4ed8;
+}
+
+.btn-secondary {
+  background: #e5e7eb;
+  color: #111827;
+}
+
+body.dark .btn-secondary {
+  background: #374151;
+  color: #e5e7eb;
+}
+
+.btn-danger {
+  background: #dc2626;
+  color: white;
+}
+
+.btn-danger:hover {
+  background: #b91c1c;
+}
+
+.form-page {
+  max-width: 480px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.form-field label {
+  margin-bottom: 4px;
+}
+
+.form-field input {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+}
+
+body.dark .form-field input {
+  background: #111827;
+  border-color: #374151;
+  color: white;
+}
+
+.form-field.error input {
+  border-color: #ef4444;
+}
+
+.error-text {
+  margin-top: 4px;
+  font-size: 12px;
+  color: #ef4444;
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+}
+

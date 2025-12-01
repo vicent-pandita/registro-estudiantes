@@ -1,0 +1,47 @@
+<div class="container mt-4">
+
+  <h2 class="mb-3">Cursos</h2>
+
+  <div class="d-flex mb-3">
+    <input [(ngModel)]="filtro" class="form-control me-2" 
+           style="max-width: 300px;" placeholder="Buscar curso...">
+
+    <button routerLink="/cursos/nuevo" class="btn btn-primary">
+      Nuevo
+    </button>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <!-- DIRECTIVA + PIPE APLICADAS AQUÍ -->
+      <tr *ngFor="let c of filtrar()" 
+          appResaltar color="lightblue">
+
+        <td>{{ c.nombre | capitalizar }}</td>
+        <td>{{ c.descripcion | capitalizar }}</td>
+
+        <td>
+          <button class="btn btn-warning btn-sm me-2" 
+                  (click)="editar(c.id!)">
+            Editar
+          </button>
+
+          <button class="btn btn-danger btn-sm" 
+                  (click)="eliminar(c.id!)">
+            Eliminar
+          </button>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
