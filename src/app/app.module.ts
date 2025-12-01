@@ -1,17 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { CoreModule } from './core/core.module';
-import { SharedModule } from './shared/shared.module';
-
-// Firebase
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
-import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 
+import { CoreModule } from './core/core.module';   // 👈 IMPORTANTE!
+import { SharedModule } from './shared/shared.module'; // si existe
 import { environment } from '../environments/environment';
 
 @NgModule({
@@ -21,13 +17,12 @@ import { environment } from '../environments/environment';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    CoreModule,
-    SharedModule,
 
-    // 🚀 IMPORTANTE: Inicializa Firebase AQUÍ
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(() => getAuth()),
-    provideFirestore(() => getFirestore())
+    CoreModule,      // 👈 AGREGA ESTO
+    SharedModule,    // 👈 si lo tienes
+
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+    provideAuth(() => getAuth())
   ],
   bootstrap: [AppComponent]
 })

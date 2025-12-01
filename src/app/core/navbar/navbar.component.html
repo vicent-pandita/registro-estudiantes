@@ -21,8 +21,16 @@
         <a class="nav-link" routerLink="/estudiantes" routerLinkActive="active">Estudiantes</a>
       </li>
 
-      <li class="nav-item">
+      <!-- ⭐ SOLO EL ADMIN VE ESTO ⭐ -->
+      <li class="nav-item" *ngIf="isAdmin">
         <a class="nav-link" routerLink="/cursos" routerLinkActive="active">Cursos</a>
+      </li>
+
+      <!-- ⭐ SOLO EL ADMIN VE ESTO ⭐ -->
+      <li class="nav-item" *ngIf="isAdmin">
+        <a class="nav-link" routerLink="/estudiantes/form" routerLinkActive="active">
+          Registrar Estudiante
+        </a>
       </li>
 
     </ul>

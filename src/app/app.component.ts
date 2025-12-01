@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../app/auth/auth.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'] // si no tienes SCSS, puedes borrar esta línea
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'registro-estudiantes';
+
+  constructor(public authService: AuthService) {}   // 👈 AGREGADO
+
 }

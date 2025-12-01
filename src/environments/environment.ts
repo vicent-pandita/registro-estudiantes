@@ -1,7 +1,6 @@
 export const environment = {
-  production: false,
-  firebase: {
-    apiKey: "ATzaSyDraoCmFfzACjADyUxgB5KBMnnVU5oZJo",
+  firebaseConfig: {
+    apiKey: "AIzaSyDraoCmFFzhCAjADyUxgB5KBMnnVU5oZJo",
     authDomain: "registro-estudiantes-6eba1.firebaseapp.com",
     projectId: "registro-estudiantes-6eba1",
     storageBucket: "registro-estudiantes-6eba1.appspot.com",
