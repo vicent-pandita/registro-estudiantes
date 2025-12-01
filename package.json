@@ -8,38 +8,26 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
-  "prettier": {
-    "printWidth": 100,
-    "singleQuote": true,
-    "overrides": [
-      {
-        "files": "*.html",
-        "options": {
-          "parser": "angular"
-        }
-      }
-    ]
-  },
   "private": true,
-  "packageManager": "npm@11.6.1",
   "dependencies": {
-    "@angular/common": "20.3.13",
-    "@angular/compiler": "20.3.13",
-    "@angular/core": "20.3.13",
-    "@angular/fire": "^20.0.1",
-    "@angular/forms": "20.3.13",
-    "@angular/platform-browser": "20.3.13",
-    "@angular/platform-browser-dynamic": "20.3.13",
-    "@angular/router": "20.3.13",
-    "rxjs": "~7.8.0",
-    "tslib": "^2.3.0"
+    "@angular/animations": "16.2.12",
+    "@angular/common": "16.2.12",
+    "@angular/compiler": "16.2.12",
+    "@angular/core": "16.2.12",
+    "@angular/fire": "^7.6.1",
+    "@angular/forms": "16.2.12",
+    "@angular/platform-browser": "16.2.12",
+    "@angular/platform-browser-dynamic": "16.2.12",
+    "@angular/router": "16.2.12",
+    "firebase": "^9.23.0",
+    "rxjs": "7.8.1",
+    "tslib": "^2.6.2",
+    "zone.js": "0.13.3"
   },
   "devDependencies": {
-    "@angular/build": "20.3.11",
-    "@angular/cli": "20.3.11",
-    "@angular/compiler-cli": "20.3.13",
-    "jsdom": "^27.1.0",
-    "typescript": "~5.9.2",
-    "vitest": "^3.2.4"
+    "@angular-devkit/build-angular": "16.2.16",
+    "@angular/cli": "16.2.16",
+    "@angular/compiler-cli": "16.2.12",
+    "typescript": "5.1.6"
   }
 }

@@ -1,0 +1,30 @@
+<div class="container mt-4" style="max-width: 600px;">
+  <h2 class="mb-3">{{ id ? 'Editar Estudiante' : 'Nuevo Estudiante' }}</h2>
+
+  <form [formGroup]="form" (ngSubmit)="guardar()">
+
+    <div class="mb-3">
+      <label>Nombre</label>
+      <input type="text" formControlName="nombre" class="form-control">
+    </div>
+
+    <div class="mb-3">
+      <label>Apellido</label>
+      <input type="text" formControlName="apellido" class="form-control">
+    </div>
+
+    <div class="mb-3">
+      <label>Edad</label>
+      <input type="number" formControlName="edad" class="form-control">
+    </div>
+
+    <div class="mb-3">
+      <label>ID Curso</label>
+      <input type="text" formControlName="cursoId" class="form-control">
+    </div>
+
+    <button class="btn btn-primary">Guardar</button>
+    <button type="button" class="btn btn-secondary ms-2" routerLink="/estudiantes">Cancelar</button>
+
+  </form>
+</div>
