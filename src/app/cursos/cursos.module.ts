@@ -7,11 +7,13 @@ import { SharedModule } from '../shared/shared.module';  // ← AQUI
 import { CursosRoutingModule } from './cursos-routing.module';
 import { ListaComponent } from './lista/lista.component';
 import { FormComponent } from './form/form.component';
+import { CatalogoComponent } from './catalogo/catalogo.component';
 
 @NgModule({
   declarations: [
     ListaComponent,
-    FormComponent
+    FormComponent,
+    CatalogoComponent
   ],
   imports: [
     CommonModule,

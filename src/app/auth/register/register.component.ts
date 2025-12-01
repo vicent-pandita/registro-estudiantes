@@ -28,6 +28,24 @@ export class RegisterComponent {
 
     this.authService.register(email!, password!)
       .then(() => this.router.navigate(['/auth/login']))
-      .catch(error => this.errorMsg = error.message);
+      .catch(error => {
+        console.error(error); // Para depuración
+        this.errorMsg = this.getErrorMessage(error.code);
+      });
+  }
+
+  private getErrorMessage(code: string): string {
+    switch (code) {
+      case 'auth/email-already-in-use':
+        return 'El correo electrónico ya está registrado.';
+      case 'auth/invalid-email':
+        return 'El correo electrónico no es válido.';
+      case 'auth/weak-password':
+        return 'La contraseña es muy débil (mínimo 6 caracteres).';
+      case 'auth/missing-password':
+        return 'La contraseña es obligatoria.';
+      default:
+        return 'Ocurrió un error al registrarse. Inténtalo de nuevo.';
+    }
   }
 }

@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 
 import { CoreModule } from './core/core.module';   // 👈 IMPORTANTE!
 import { SharedModule } from './shared/shared.module'; // si existe
@@ -22,8 +23,9 @@ import { environment } from '../environments/environment';
     SharedModule,    // 👈 si lo tienes
 
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
-    provideAuth(() => getAuth())
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore())
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

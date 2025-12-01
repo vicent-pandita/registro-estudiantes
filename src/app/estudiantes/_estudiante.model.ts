@@ -3,5 +3,8 @@ export interface Estudiante {
   nombre: string;
   apellido: string;
   edad: number;
-  cursoId: string;
+  dni: string;      // 👈 Nuevo
+  grado: string;    // 👈 Nuevo
+  curso: string;    // 👈 Nuevo
+  codigo?: string;
 }

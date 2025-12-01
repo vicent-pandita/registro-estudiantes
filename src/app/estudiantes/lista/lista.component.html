@@ -3,57 +3,66 @@
   <h2 class="mb-3">Estudiantes</h2>
 
   <div class="d-flex mb-3">
-    <input [(ngModel)]="filtro" type="text" placeholder="Buscar..." 
-           class="form-control me-2" style="max-width: 300px;">
+    <input [(ngModel)]="filtro" type="text" placeholder="Buscar por nombre, apellido, código o DNI..."
+      class="form-control me-2" style="max-width: 400px;">
 
-    <button routerLink="/estudiantes/nuevo" class="btn btn-primary">
+    <button (click)="abrirModal()" class="btn btn-primary me-2">
       Nuevo
+    </button>
+
+    <button (click)="descargar()" class="btn btn-success">
+      Descargar Lista
     </button>
   </div>
 
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Nombre</th>
-        <th>Apellido</th>
-        <th>Edad</th>
-        <th>ID Curso</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
+  <div class="table-container">
+    <table class="excel-table">
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>DNI</th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Edad</th>
+          <th>Grado</th>
+          <th>Curso</th>
+          <th></th>
+        </tr>
+      </thead>
 
-    <tbody>
+      <tbody>
 
-      <!-- Si no encuentra datos -->
-      <tr *ngIf="filtrar().length === 0">
-        <td colspan="5" class="text-center text-muted py-3">
-          No se encontraron resultados.
-        </td>
-      </tr>
+        <!-- Si no encuentra datos -->
+        <tr *ngIf="filtrar().length === 0">
+          <td colspan="8" class="text-center text-muted py-3">
+            No se encontraron resultados.
+          </td>
+        </tr>
 
-      <!-- Filas con directiva y pipes -->
-      <tr *ngFor="let e of filtrar()"
-          appResaltar
-          color="lightyellow">
+        <!-- Filas con directiva y pipes -->
+        <tr *ngFor="let e of filtrar()" appResaltar color="lightyellow">
 
-        <td>{{ e.nombre | capitalizar }}</td>
-        <td>{{ e.apellido | capitalizar }}</td>
-        <td>{{ e.edad }}</td>
-        <td>{{ e.cursoId }}</td>
+          <td><strong>{{ e.codigo || 'N/A' }}</strong></td>
+          <td>{{ e.dni || '-' }}</td>
+          <td>{{ e.nombre | capitalizar }}</td>
+          <td>{{ e.apellido | capitalizar }}</td>
+          <td>{{ e.edad }}</td>
+          <td>{{ e.grado }}</td>
+          <td>{{ e.curso }}</td>
 
-        <td>
-          <button class="btn btn-warning btn-sm me-2"
-                  (click)="editar(e.id!)">
-            Editar
-          </button>
+          <td>
+            <div class="action-icons">
+              <i class="fas fa-pencil-alt icon-edit" (click)="editar(e.id!)" title="Editar"></i>
+              <i class="fas fa-trash-alt icon-delete" (click)="eliminar(e.id!)" title="Eliminar"></i>
+            </div>
+          </td>
+        </tr>
 
-          <button class="btn btn-danger btn-sm"
-                  (click)="eliminar(e.id!)">
-            Eliminar
-          </button>
-        </td>
-      </tr>
+      </tbody>
+    </table>
+  </div>
 
-    </tbody>
-  </table>
+  <!-- 👇 MODAL COMPONENT -->
+  <app-estudiante-modal (cerrado)="ngOnInit()"></app-estudiante-modal>
+
 </div>
