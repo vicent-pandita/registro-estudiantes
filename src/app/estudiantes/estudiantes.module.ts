@@ -7,11 +7,13 @@ import { SharedModule } from '../shared/shared.module'; // ← AQUI
 import { EstudiantesRoutingModule } from './estudiantes-routing.module';
 import { ListaComponent } from './lista/lista.component';
 import { FormComponent } from './form/form.component';
+import { EstudianteModalComponent } from './modal/estudiante-modal.component'; // 👈 Importar
 
 @NgModule({
   declarations: [
     ListaComponent,
-    FormComponent
+    FormComponent,
+    EstudianteModalComponent // 👈 Declarar
   ],
   imports: [
     CommonModule,
@@ -21,4 +23,4 @@ import { FormComponent } from './form/form.component';
     SharedModule // ← IMPORTANTE
   ]
 })
-export class EstudiantesModule {}
+export class EstudiantesModule { }

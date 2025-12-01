@@ -1,26 +1,29 @@
-<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
-  <div class="card p-4 shadow" style="min-width: 350px;">
-    
-    <h3 class="text-center mb-3">Iniciar Sesión</h3>
+<div class="login-page">
+  <div class="login-container">
+    <h1 class="main-title">Registro de Estudiantes</h1>
 
-    <form [formGroup]="form" (ngSubmit)="login()">
+    <div class="card p-4 shadow login-card">
+      <h3 class="text-center mb-3">Iniciar Sesión</h3>
 
-      <label>Email</label>
-      <input type="email" class="form-control" formControlName="email">
+      <form [formGroup]="form" (ngSubmit)="login()">
 
-      <label class="mt-3">Contraseña</label>
-      <input type="password" class="form-control" formControlName="password">
+        <label>Email</label>
+        <input type="email" class="form-control" formControlName="email">
 
-      <button class="btn btn-primary w-100 mt-3">Ingresar</button>
+        <label class="mt-3">Contraseña</label>
+        <input type="password" class="form-control" formControlName="password">
 
-      <p class="text-danger mt-2 text-center" *ngIf="errorMsg">{{ errorMsg }}</p>
+        <button class="btn btn-primary w-100 mt-3">Ingresar</button>
 
-    </form>
+        <p class="text-danger mt-2 text-center" *ngIf="errorMsg">{{ errorMsg }}</p>
 
-    <p class="mt-3 text-center">
-      ¿No tienes cuenta?
-      <a routerLink="/auth/register">Registrarse</a>
-    </p>
+      </form>
 
+      <p class="mt-3 text-center">
+        ¿No tienes cuenta?
+        <a routerLink="/auth/register">Registrarse</a>
+      </p>
+
+    </div>
   </div>
 </div>

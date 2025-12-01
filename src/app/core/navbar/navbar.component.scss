@@ -1,4 +1,153 @@
+.modern-navbar {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 0;
+}
+
+.navbar-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0.75rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .navbar-brand {
-  font-weight: bold;
-  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: white;
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 700;
+  transition: opacity 0.3s;
+
+  i {
+    font-size: 1.8rem;
+  }
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.navbar-toggler {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  cursor: pointer;
+
+  .navbar-toggler-icon {
+    width: 24px;
+    height: 2px;
+    background: white;
+    display: block;
+    position: relative;
+
+    &::before,
+    &::after {
+      content: '';
+      width: 24px;
+      height: 2px;
+      background: white;
+      position: absolute;
+      left: 0;
+    }
+
+    &::before {
+      top: -8px;
+    }
+
+    &::after {
+      top: 8px;
+    }
+  }
+}
+
+.navbar-collapse {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.navbar-nav {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 0.5rem;
+}
+
+.nav-item {
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s;
+
+    i {
+      font-size: 1.1rem;
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+    }
+
+    &.active {
+      background: rgba(255, 255, 255, 0.25);
+      color: white;
+      font-weight: 600;
+    }
+  }
+}
+
+.btn-logout {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+
+  i {
+    font-size: 1.1rem;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+  }
+}
+
+@media (max-width: 992px) {
+  .navbar-collapse {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-top: 1rem;
+  }
+
+  .navbar-nav {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btn-logout {
+    width: 100%;
+    justify-content: center;
+    margin-top: 1rem;
+  }
 }

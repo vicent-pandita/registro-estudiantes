@@ -1,0 +1,57 @@
+<div class="modal-backdrop" *ngIf="isVisible">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Nuevo Estudiante</h3>
+            <button class="close-btn" (click)="cerrar()">×</button>
+        </div>
+
+        <div class="modal-body">
+            <form [formGroup]="form" (ngSubmit)="guardar()">
+
+                <div class="form-group">
+                    <label>DNI</label>
+                    <input formControlName="dni" class="form-control" placeholder="Ej: 12345678">
+                </div>
+
+                <div class="form-group">
+                    <label>Nombre</label>
+                    <input formControlName="nombre" class="form-control" placeholder="Ej: Juan">
+                </div>
+
+                <div class="form-group">
+                    <label>Apellido</label>
+                    <input formControlName="apellido" class="form-control" placeholder="Ej: Pérez">
+                </div>
+
+                <div class="form-group">
+                    <label>Edad</label>
+                    <input type="number" formControlName="edad" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label>Grado</label>
+                    <input formControlName="grado" class="form-control" placeholder="Ej: 5to Primaria o 3ro Secundaria">
+                    <small class="text-muted">Escribe "Primaria" o "Secundaria" para filtrar los cursos</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Curso</label>
+                    <input formControlName="curso" class="form-control" list="cursosList"
+                        placeholder="Escribe o selecciona un curso...">
+                    <datalist id="cursosList">
+                        <option *ngFor="let c of cursosFiltrados" [value]="c">{{ c }}</option>
+                    </datalist>
+                    <small class="text-muted">
+                        💡 Los cursos se filtran automáticamente según el grado
+                    </small>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="cerrar()">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Guardar</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
