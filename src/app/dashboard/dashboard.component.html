@@ -7,8 +7,8 @@
 
   <div class="stats-grid">
 
-    <!-- Card: Total Estudiantes -->
-    <div class="stat-card card-blue">
+    <!-- Card: Total Estudiantes - CLICKEABLE -->
+    <div class="stat-card card-blue clickable" (click)="abrirModalEstudiantes()">
       <div class="stat-icon">
         <i class="fas fa-user-graduate"></i>
       </div>
@@ -18,8 +18,8 @@
       </div>
     </div>
 
-    <!-- Card: Total Cursos -->
-    <div class="stat-card card-green">
+    <!-- Card: Total Cursos - CLICKEABLE -->
+    <div class="stat-card card-green clickable" (click)="abrirModalCursos()">
       <div class="stat-icon">
         <i class="fas fa-book"></i>
       </div>
@@ -29,8 +29,8 @@
       </div>
     </div>
 
-    <!-- Card: Promedio Edad -->
-    <div class="stat-card card-orange">
+    <!-- Card: Promedio Edad - CLICKEABLE -->
+    <div class="stat-card card-orange clickable" (click)="abrirModalEdad()">
       <div class="stat-icon">
         <i class="fas fa-chart-line"></i>
       </div>
@@ -40,8 +40,8 @@
       </div>
     </div>
 
-    <!-- Card: Grados Activos -->
-    <div class="stat-card card-purple">
+    <!-- Card: Grados Activos - CLICKEABLE -->
+    <div class="stat-card card-purple clickable" (click)="abrirModalGrados()">
       <div class="stat-icon">
         <i class="fas fa-graduation-cap"></i>
       </div>
@@ -72,6 +72,276 @@
         <i class="fas fa-file-download"></i>
         <span>Descargar Reporte</span>
       </button>
+
+    </div>
+  </div>
+
+  <!-- MODAL DE CURSOS OFICIALES -->
+  <div class="modal-overlay" *ngIf="mostrarModalCursos" (click)="cerrarModalCursos()">
+    <div class="modal-content-cursos" (click)="$event.stopPropagation()">
+
+      <div class="modal-header">
+        <h2>📚 Cursos Oficiales del Sistema Educativo Peruano</h2>
+        <button class="btn-close-modal" (click)="cerrarModalCursos()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <div class="modal-body">
+
+        <!-- Educación Primaria -->
+        <div class="nivel-educativo">
+          <h3 class="nivel-titulo primaria">
+            <i class="fas fa-child"></i>
+            Educación Primaria
+          </h3>
+          <div class="cursos-grid">
+            <div class="curso-item" *ngFor="let curso of cursosOficiales.primaria">
+              <i class="fas fa-book-open"></i>
+              <span>{{ curso }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Educación Secundaria -->
+        <div class="nivel-educativo">
+          <h3 class="nivel-titulo secundaria">
+            <i class="fas fa-user-graduate"></i>
+            Educación Secundaria
+          </h3>
+          <div class="cursos-grid">
+            <div class="curso-item" *ngFor="let curso of cursosOficiales.secundaria">
+              <i class="fas fa-book-open"></i>
+              <span>{{ curso }}</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-primary" (click)="cerrarModalCursos()">Cerrar</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODAL DE DISTRIBUCIÓN POR GRADOS -->
+  <div class="modal-overlay" *ngIf="mostrarModalGrados" (click)="cerrarModalGrados()">
+    <div class="modal-content-grados" (click)="$event.stopPropagation()">
+
+      <div class="modal-header">
+        <h2>🎓 Distribución de Estudiantes por Grado</h2>
+        <button class="btn-close-modal" (click)="cerrarModalGrados()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <div class="modal-body">
+
+        <!-- Mensaje si no hay estudiantes -->
+        <div *ngIf="distribucionGrados.length === 0" class="empty-state">
+          <i class="fas fa-inbox"></i>
+          <p>No hay estudiantes registrados aún</p>
+        </div>
+
+        <!-- Lista de grados con estadísticas -->
+        <div class="grados-list" *ngIf="distribucionGrados.length > 0">
+
+          <div class="grado-item" *ngFor="let item of distribucionGrados">
+
+            <div class="grado-info">
+              <div class="grado-nombre">
+                <i class="fas fa-book-reader"></i>
+                <span>{{ item.grado }}</span>
+              </div>
+              <div class="grado-stats">
+                <span class="cantidad">{{ item.cantidad }} estudiante{{ item.cantidad !== 1 ? 's' : '' }}</span>
+                <span class="porcentaje">{{ item.porcentaje }}%</span>
+              </div>
+            </div>
+
+            <!-- Barra de progreso -->
+            <div class="progress-bar-container">
+              <div class="progress-bar-fill" [style.width.%]="item.porcentaje"></div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Resumen total -->
+        <div class="resumen-total" *ngIf="distribucionGrados.length > 0">
+          <div class="resumen-item">
+            <i class="fas fa-users"></i>
+            <span>Total de estudiantes: <strong>{{ totalEstudiantes }}</strong></span>
+          </div>
+          <div class="resumen-item">
+            <i class="fas fa-layer-group"></i>
+            <span>Grados activos: <strong>{{ gradosUnicos }}</strong></span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-primary" (click)="cerrarModalGrados()">Cerrar</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODAL DE EDAD PROMEDIO POR NIVEL -->
+  <div class="modal-overlay" *ngIf="mostrarModalEdad" (click)="cerrarModalEdad()">
+    <div class="modal-content-edad" (click)="$event.stopPropagation()">
+
+      <div class="modal-header">
+        <h2>📊 Promedio de Edad por Nivel Educativo</h2>
+        <button class="btn-close-modal" (click)="cerrarModalEdad()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <div class="modal-body">
+
+        <!-- Mensaje si no hay estudiantes -->
+        <div *ngIf="totalEstudiantes === 0" class="empty-state">
+          <i class="fas fa-inbox"></i>
+          <p>No hay estudiantes registrados aún</p>
+        </div>
+
+        <!-- Estadísticas por nivel -->
+        <div class="niveles-edad" *ngIf="totalEstudiantes > 0">
+
+          <!-- Educación Primaria -->
+          <div class="nivel-edad-card primaria">
+            <div class="nivel-header">
+              <i class="fas fa-child"></i>
+              <h3>Educación Primaria</h3>
+            </div>
+            <div class="edad-stats">
+              <div class="edad-principal">
+                <span class="edad-numero">{{ promedioEdadPrimaria }}</span>
+                <span class="edad-label">años</span>
+              </div>
+              <div class="edad-info">
+                <i class="fas fa-users"></i>
+                <span>{{ totalEstudiantesPrimaria }} estudiante{{ totalEstudiantesPrimaria !== 1 ? 's' : '' }}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Educación Secundaria -->
+          <div class="nivel-edad-card secundaria">
+            <div class="nivel-header">
+              <i class="fas fa-user-graduate"></i>
+              <h3>Educación Secundaria</h3>
+            </div>
+            <div class="edad-stats">
+              <div class="edad-principal">
+                <span class="edad-numero">{{ promedioEdadSecundaria }}</span>
+                <span class="edad-label">años</span>
+              </div>
+              <div class="edad-info">
+                <i class="fas fa-users"></i>
+                <span>{{ totalEstudiantesSecundaria }} estudiante{{ totalEstudiantesSecundaria !== 1 ? 's' : ''
+                  }}</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Promedio General -->
+        <div class="promedio-general" *ngIf="totalEstudiantes > 0">
+          <div class="general-card">
+            <i class="fas fa-chart-bar"></i>
+            <div class="general-info">
+              <span class="general-label">Promedio General</span>
+              <span class="general-valor">{{ promedioEdad }} años</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-primary" (click)="cerrarModalEdad()">Cerrar</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODAL DE DISTRIBUCIÓN DE ESTUDIANTES -->
+  <div class="modal-overlay" *ngIf="mostrarModalEstudiantes" (click)="cerrarModalEstudiantes()">
+    <div class="modal-content-estudiantes" (click)="$event.stopPropagation()">
+
+      <div class="modal-header">
+        <h2>🎓 Distribución de Estudiantes por Nivel</h2>
+        <button class="btn-close-modal" (click)="cerrarModalEstudiantes()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <div class="modal-body">
+
+        <!-- Mensaje si no hay estudiantes -->
+        <div *ngIf="totalEstudiantes === 0" class="empty-state">
+          <i class="fas fa-inbox"></i>
+          <p>No hay estudiantes registrados aún</p>
+        </div>
+
+        <!-- Distribución por nivel -->
+        <div class="distribucion-niveles" *ngIf="totalEstudiantes > 0">
+
+          <!-- Educación Primaria -->
+          <div class="nivel-card primaria-card">
+            <div class="nivel-icon">
+              <i class="fas fa-child"></i>
+            </div>
+            <div class="nivel-content">
+              <h3>Educación Primaria</h3>
+              <div class="nivel-numero">{{ totalEstudiantesPrimaria }}</div>
+              <p class="nivel-label">estudiante{{ totalEstudiantesPrimaria !== 1 ? 's' : '' }}</p>
+              <div class="nivel-porcentaje" *ngIf="totalEstudiantes > 0">
+                {{ ((totalEstudiantesPrimaria / totalEstudiantes) * 100).toFixed(1) }}% del total
+              </div>
+            </div>
+          </div>
+
+          <!-- Educación Secundaria -->
+          <div class="nivel-card secundaria-card">
+            <div class="nivel-icon">
+              <i class="fas fa-user-graduate"></i>
+            </div>
+            <div class="nivel-content">
+              <h3>Educación Secundaria</h3>
+              <div class="nivel-numero">{{ totalEstudiantesSecundaria }}</div>
+              <p class="nivel-label">estudiante{{ totalEstudiantesSecundaria !== 1 ? 's' : '' }}</p>
+              <div class="nivel-porcentaje" *ngIf="totalEstudiantes > 0">
+                {{ ((totalEstudiantesSecundaria / totalEstudiantes) * 100).toFixed(1) }}% del total
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Total General -->
+        <div class="total-general" *ngIf="totalEstudiantes > 0">
+          <div class="total-card">
+            <i class="fas fa-users"></i>
+            <div class="total-info">
+              <span class="total-label">Total de Estudiantes</span>
+              <span class="total-valor">{{ totalEstudiantes }}</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-primary" (click)="cerrarModalEstudiantes()">Cerrar</button>
+      </div>
 
     </div>
   </div>

@@ -46,6 +46,15 @@
         box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
     }
 
+    &.clickable {
+        cursor: pointer;
+
+        &:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+    }
+
     .stat-icon {
         width: 70px;
         height: 70px;
@@ -145,4 +154,608 @@
     &.btn-info {
         background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
     }
+}
+
+// MODAL DE CURSOS OFICIALES
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-content-cursos {
+    background: white;
+    border-radius: 20px;
+    max-width: 900px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-header {
+    padding: 2rem;
+    border-bottom: 2px solid #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h2 {
+        margin: 0;
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #2c3e50;
+    }
+
+    .btn-close-modal {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        color: #6c757d;
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s;
+
+        &:hover {
+            background: #f0f0f0;
+            color: #dc3545;
+        }
+    }
+}
+
+.modal-body {
+    padding: 2rem;
+}
+
+.nivel-educativo {
+    margin-bottom: 2.5rem;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.nivel-titulo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+
+    &.primaria {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+
+    &.secundaria {
+        background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        color: white;
+    }
+
+    i {
+        font-size: 1.8rem;
+    }
+}
+
+.cursos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.curso-item {
+    background: #f8f9fa;
+    padding: 1rem 1.2rem;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    transition: all 0.3s;
+    border: 2px solid transparent;
+
+    i {
+        color: #667eea;
+        font-size: 1.2rem;
+    }
+
+    span {
+        font-weight: 500;
+        color: #2c3e50;
+    }
+
+    &:hover {
+        background: white;
+        border-color: #667eea;
+        transform: translateX(5px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+}
+
+
+.modal-footer {
+    padding: 1.5rem 2rem;
+    border-top: 2px solid #f0f0f0;
+    display: flex;
+    justify-content: flex-end;
+}
+
+// MODAL DE DISTRIBUCIÓN POR GRADOS
+.modal-content-grados {
+    background: white;
+    border-radius: 20px;
+    max-width: 700px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.3s ease;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 3rem;
+    color: #6c757d;
+
+    i {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        opacity: 0.5;
+    }
+
+    p {
+        font-size: 1.1rem;
+        margin: 0;
+    }
+}
+
+.grados-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.grado-item {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 12px;
+    transition: all 0.3s;
+
+    &:hover {
+        background: #e9ecef;
+        transform: translateX(5px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+}
+
+.grado-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.grado-nombre {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #2c3e50;
+
+    i {
+        color: #667eea;
+        font-size: 1.3rem;
+    }
+}
+
+.grado-stats {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .cantidad {
+        color: #6c757d;
+        font-size: 0.95rem;
+    }
+
+    .porcentaje {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-weight: 700;
+        font-size: 0.9rem;
+    }
+}
+
+.progress-bar-container {
+    width: 100%;
+    height: 12px;
+    background: #dee2e6;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    border-radius: 10px;
+    transition: width 0.6s ease;
+    animation: fillBar 0.8s ease;
+}
+
+@keyframes fillBar {
+    from {
+        width: 0;
+    }
+}
+
+.resumen-total {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 2px solid #e9ecef;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.resumen-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 10px;
+    font-size: 1rem;
+
+    i {
+        color: #667eea;
+        font-size: 1.5rem;
+    }
+
+    strong {
+        color: #667eea;
+    }
+}// MODAL DE EDAD PROMEDIO POR NIVEL
+.modal-content-edad {
+    background: white;
+    border-radius: 20px;
+    max-width: 650px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.3s ease;
+}
+
+.niveles-edad {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.nivel-edad-card {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s;
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    &.primaria {
+        border-top: 4px solid #667eea;
+
+        .nivel-header {
+            color: #667eea;
+        }
+
+        .edad-numero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+    }
+
+    &.secundaria {
+        border-top: 4px solid #11998e;
+
+        .nivel-header {
+            color: #11998e;
+        }
+
+        .edad-numero {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+    }
+}
+
+.nivel-header {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+
+    i {
+        font-size: 1.8rem;
+    }
+
+    h3 {
+        margin: 0;
+        font-size: 1.3rem;
+        font-weight: 700;
+    }
+}
+
+.edad-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.edad-principal {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+}
+
+.edad-numero {
+    font-size: 3.5rem;
+    font-weight: 800;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+}
+
+.edad-label {
+    font-size: 1.2rem;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.edad-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #6c757d;
+    font-size: 1rem;
+
+    i {
+        color: #667eea;
+    }
+}
+
+.promedio-general {
+    padding-top: 2rem;
+    border-top: 2px solid #e9ecef;
+}
+
+.general-card {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 1.5rem;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+
+    i {
+        font-size: 2.5rem;
+        color: #f093fb;
+    }
+}
+
+.general-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.general-label {
+    font-size: 0.9rem;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.general-valor {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #2c3e50;
+}
+// MODAL DE DISTRIBUCIÓN DE ESTUDIANTES
+.modal-content-estudiantes {
+    background: white;
+    border-radius: 20px;
+    max-width: 700px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.3s ease;
+}
+
+.distribucion-niveles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.nivel-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 6px;
+    }
+
+    &:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    &.primaria-card {
+        &::before {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .nivel-icon {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .nivel-numero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+    }
+
+    &.secundaria-card {
+        &::before {
+            background: linear-gradient(90deg, #11998e 0%, #38ef7d 100%);
+        }
+
+        .nivel-icon {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+
+        .nivel-numero {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+    }
+}
+
+.nivel-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    color: white;
+    font-size: 2.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.nivel-content {
+    h3 {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #2c3e50;
+        margin-bottom: 1rem;
+    }
+}
+
+.nivel-numero {
+    font-size: 4rem;
+    font-weight: 800;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.nivel-label {
+    font-size: 1.1rem;
+    color: #6c757d;
+    margin-bottom: 1rem;
+}
+
+.nivel-porcentaje {
+    display: inline-block;
+    background: #f8f9fa;
+    padding: 0.5rem 1.2rem;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    color: #667eea;
+    font-weight: 600;
+}
+
+.total-general {
+    padding-top: 2rem;
+    border-top: 3px solid #e9ecef;
+}
+
+.total-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 2rem;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    color: white;
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+
+    i {
+        font-size: 3rem;
+    }
+}
+
+.total-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.total-label {
+    font-size: 1rem;
+    opacity: 0.9;
+    font-weight: 500;
+}
+
+.total-valor {
+    font-size: 2.5rem;
+    font-weight: 800;
 }
