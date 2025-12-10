@@ -39,7 +39,7 @@
     display: flex;
     align-items: center;
     gap: 1.5rem;
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 
     &:hover {
         transform: translateY(-5px);
@@ -50,8 +50,13 @@
         cursor: pointer;
 
         &:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        &:active {
+            transform: translateY(-4px) scale(0.98);
+            transition: transform 0.1s ease;
         }
     }
 
@@ -131,16 +136,26 @@
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
     color: white;
 
     i {
         font-size: 2rem;
+        transition: transform 0.3s ease;
     }
 
     &:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+
+        i {
+            transform: scale(1.1);
+        }
+    }
+
+    &:active {
+        transform: translateY(-2px) scale(1.02);
+        transition: transform 0.1s ease;
     }
 
     &.btn-primary {
@@ -455,7 +470,9 @@
     strong {
         color: #667eea;
     }
-}// MODAL DE EDAD PROMEDIO POR NIVEL
+}
+
+// MODAL DE EDAD PROMEDIO POR NIVEL
 .modal-content-edad {
     background: white;
     border-radius: 20px;
@@ -603,6 +620,7 @@
     font-weight: 700;
     color: #2c3e50;
 }
+
 // MODAL DE DISTRIBUCIÓN DE ESTUDIANTES
 .modal-content-estudiantes {
     background: white;
@@ -758,4 +776,226 @@
 .total-valor {
     font-size: 2.5rem;
     font-weight: 800;
+}
+
+// MODAL DE CATÁLOGO DE CURSOS
+.modal-content-cursos {
+    background: white;
+    border-radius: 20px;
+    max-width: 900px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.3s ease;
+}
+
+.nivel-cursos {
+    margin-bottom: 2rem;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.primaria-section {
+    .nivel-titulo {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 1.5rem;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+
+        i {
+            font-size: 2rem;
+        }
+
+        h3 {
+            margin: 0;
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+    }
+}
+
+.secundaria-section {
+    .nivel-titulo {
+        background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        color: white;
+        padding: 1.5rem;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+
+        i {
+            font-size: 2rem;
+        }
+
+        h3 {
+            margin: 0;
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+    }
+}
+
+.areas-principales,
+.areas-complementarias {
+    margin-bottom: 1.5rem;
+
+    h4 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 1rem;
+        padding-left: 0.5rem;
+        border-left: 4px solid #667eea;
+    }
+}
+
+.areas-complementarias h4 {
+    border-left-color: #11998e;
+}
+
+.cursos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+}
+
+.curso-item {
+    background: #f8f9fa;
+    padding: 1rem 1.2rem;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    transition: all 0.3s;
+    border: 2px solid transparent;
+
+    i {
+        font-size: 1.2rem;
+        flex-shrink: 0;
+    }
+
+    span {
+        font-weight: 500;
+        color: #2c3e50;
+        font-size: 0.95rem;
+    }
+
+    &.principal {
+        border-left: 4px solid #667eea;
+
+        i {
+            color: #667eea;
+        }
+
+        &:hover {
+            background: white;
+            border-color: #667eea;
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+    }
+
+    &.complementaria {
+        border-left: 4px solid #11998e;
+
+        i {
+            color: #11998e;
+        }
+
+        &:hover {
+            background: white;
+            border-color: #11998e;
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(17, 153, 142, 0.2);
+        }
+    }
+
+    &.secundaria {
+        border-left: 4px solid #38ef7d;
+
+        i {
+            color: #11998e;
+        }
+
+        &:hover {
+            background: white;
+            border-color: #38ef7d;
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(56, 239, 125, 0.2);
+        }
+    }
+}
+
+.separador-niveles {
+    border: none;
+    height: 3px;
+    background: linear-gradient(90deg, #667eea 0%, #11998e 50%, #38ef7d 100%);
+    margin: 2.5rem 0;
+    border-radius: 10px;
+}
+
+.resumen-cursos {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 2px solid #e9ecef;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+
+    .resumen-item {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        padding: 1.2rem;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        border-radius: 10px;
+        font-size: 1rem;
+
+        i {
+            font-size: 1.8rem;
+        }
+
+        &:first-child i {
+            color: #667eea;
+        }
+
+        &:last-child i {
+            color: #11998e;
+        }
+
+        strong {
+            color: #2c3e50;
+            font-size: 1.2rem;
+        }
+    }
+}
+
+// Botón general para modales
+.btn {
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 1rem;
+
+    &.btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(102, 126, 234, 0.3);
+        }
+    }
 }

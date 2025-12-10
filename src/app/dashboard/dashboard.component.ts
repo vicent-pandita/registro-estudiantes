@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { trigger, state, style, transition, animate, query, stagger } from '@angular/animations';
 import { EstudiantesService } from '../estudiantes/estudiantes.service';
 import { CursosService } from '../cursos/cursos.service';
 import { Estudiante } from '../estudiantes/_estudiante.model';
@@ -7,56 +8,113 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
+  animations: [
+    // Animación para modales - fade in/out con scale
+    trigger('modalAnimation', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'scale(0.9)' }),
+        animate('300ms ease-out', style({ opacity: 1, transform: 'scale(1)' }))
+      ]),
+      transition(':leave', [
+        animate('200ms ease-in', style({ opacity: 0, transform: 'scale(0.9)' }))
+      ])
+    ]),
+
+    // Animación para backdrop del modal
+    trigger('backdropAnimation', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('200ms ease-out', style({ opacity: 1 }))
+      ]),
+      transition(':leave', [
+        animate('150ms ease-in', style({ opacity: 0 }))
+      ])
+    ]),
+
+    // Animación para cards estadísticas - entrada escalonada
+    trigger('cardAnimation', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(20px)' }),
+        animate('400ms {{delay}}ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+      ], { params: { delay: 0 } })
+    ]),
+
+    // Animación para items de lista - entrada escalonada
+    trigger('listAnimation', [
+      transition('* => *', [
+        query(':enter', [
+          style({ opacity: 0, transform: 'translateX(-20px)' }),
+          stagger(50, [
+            animate('300ms ease-out', style({ opacity: 1, transform: 'translateX(0)' }))
+          ])
+        ], { optional: true })
+      ])
+    ]),
+
+    // Animación para botones de acción
+    trigger('buttonAnimation', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'scale(0.8)' }),
+        animate('300ms {{delay}}ms cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+          style({ opacity: 1, transform: 'scale(1)' }))
+      ], { params: { delay: 0 } })
+    ])
+  ]
 })
 export class DashboardComponent implements OnInit {
+  // Propiedades para estadísticas
+  totalEstudiantes: number = 0;
+  totalCursos: number = 0;
+  promedioEdad: number = 0;
+  gradosUnicos: number = 0;
 
-  totalEstudiantes = 0;
-  totalCursos = 0;
-  promedioEdad = 0;
-  gradosUnicos = 0;
+  // Propiedades para modales
+  mostrarModalGrados: boolean = false;
+  mostrarModalEdad: boolean = false;
+  mostrarModalEstudiantes: boolean = false;
+  mostrarModalCursos: boolean = false;
 
-  // Modal de cursos oficiales
-  mostrarModalCursos = false;
+  // Propiedades para distribución de grados
+  distribucionGrados: Array<{
+    grado: string;
+    cantidad: number;
+    porcentaje: number;
+  }> = [];
 
-  // Modal de grados activos
-  mostrarModalGrados = false;
-  distribucionGrados: { grado: string, cantidad: number, porcentaje: number }[] = [];
+  // Propiedades para edad por nivel
+  totalEstudiantesPrimaria: number = 0;
+  totalEstudiantesSecundaria: number = 0;
+  promedioEdadPrimaria: number = 0;
+  promedioEdadSecundaria: number = 0;
 
-  // Modal de edad promedio
-  mostrarModalEdad = false;
-  promedioEdadPrimaria = 0;
-  promedioEdadSecundaria = 0;
-  totalEstudiantesPrimaria = 0;
-  totalEstudiantesSecundaria = 0;
+  // Catálogo oficial de cursos
+  cursosPrimaria: string[] = [
+    'Matemática',
+    'Comunicación',
+    'Personal Social',
+    'Ciencia y Ambiente',
+    'Arte y Cultura',
+    'Educación Física',
+    'Inglés como lengua extranjera',
+    'Educación Religiosa',
+    'Desarrollo Personal, Ciudadanía y Cívica',
+    'Ciencias Sociales',
+    'Educación para el Trabajo'
+  ];
 
-  // Modal de distribución de estudiantes
-  mostrarModalEstudiantes = false;
-
-  cursosOficiales = {
-    primaria: [
-      'Matemática',
-      'Comunicación',
-      'Personal Social',
-      'Ciencia y Tecnología',
-      'Arte y Cultura',
-      'Educación Física',
-      'Educación Religiosa',
-      'Inglés'
-    ],
-    secundaria: [
-      'Matemática',
-      'Comunicación',
-      'Inglés',
-      'Arte y Cultura',
-      'Ciencias Sociales',
-      'Desarrollo Personal, Ciudadanía y Cívica',
-      'Educación Física',
-      'Educación Religiosa',
-      'Ciencia y Tecnología',
-      'Educación para el Trabajo'
-    ]
-  };
+  cursosSecundaria: string[] = [
+    'Matemática',
+    'Comunicación (Lengua y Literatura)',
+    'Inglés (Lengua Extranjera)',
+    'Arte y Cultura',
+    'Ciencias Sociales (Historia, Geografía)',
+    'Desarrollo Personal, Ciudadanía y Cívica (DPC)',
+    'Educación Física',
+    'Educación Religiosa',
+    'Ciencia y Tecnología (incluye Biología, Física, Química)',
+    'Educación para el Trabajo (EPT)'
+  ];
 
   constructor(
     private estudiantesService: EstudiantesService,
@@ -122,13 +180,7 @@ export class DashboardComponent implements OnInit {
       });
   }
 
-  abrirModalCursos() {
-    this.mostrarModalCursos = true;
-  }
 
-  cerrarModalCursos() {
-    this.mostrarModalCursos = false;
-  }
 
   abrirModalGrados() {
     this.mostrarModalGrados = true;
@@ -187,5 +239,13 @@ export class DashboardComponent implements OnInit {
   descargarReporte() {
     // Redirigir a estudiantes para usar la función de descarga
     this.router.navigate(['/estudiantes']);
+  }
+
+  abrirModalCursos() {
+    this.mostrarModalCursos = true;
+  }
+
+  cerrarModalCursos() {
+    this.mostrarModalCursos = false;
   }
 }
