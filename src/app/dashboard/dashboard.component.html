@@ -8,7 +8,8 @@
   <div class="stats-grid">
 
     <!-- Card: Total Estudiantes - CLICKEABLE -->
-    <div class="stat-card card-blue clickable" (click)="abrirModalEstudiantes()">
+    <div class="stat-card card-blue clickable" (click)="abrirModalEstudiantes()"
+      [@cardAnimation]="{ value: '', params: { delay: 0 } }">
       <div class="stat-icon">
         <i class="fas fa-user-graduate"></i>
       </div>
@@ -18,19 +19,9 @@
       </div>
     </div>
 
-    <!-- Card: Total Cursos - CLICKEABLE -->
-    <div class="stat-card card-green clickable" (click)="abrirModalCursos()">
-      <div class="stat-icon">
-        <i class="fas fa-book"></i>
-      </div>
-      <div class="stat-content">
-        <h3>{{ totalCursos }}</h3>
-        <p>Cursos Disponibles</p>
-      </div>
-    </div>
-
     <!-- Card: Promedio Edad - CLICKEABLE -->
-    <div class="stat-card card-orange clickable" (click)="abrirModalEdad()">
+    <div class="stat-card card-orange clickable" (click)="abrirModalEdad()"
+      [@cardAnimation]="{ value: '', params: { delay: 100 } }">
       <div class="stat-icon">
         <i class="fas fa-chart-line"></i>
       </div>
@@ -41,7 +32,8 @@
     </div>
 
     <!-- Card: Grados Activos - CLICKEABLE -->
-    <div class="stat-card card-purple clickable" (click)="abrirModalGrados()">
+    <div class="stat-card card-purple clickable" (click)="abrirModalGrados()"
+      [@cardAnimation]="{ value: '', params: { delay: 200 } }">
       <div class="stat-icon">
         <i class="fas fa-graduation-cap"></i>
       </div>
@@ -58,17 +50,20 @@
     <h2>Accesos Rápidos</h2>
     <div class="actions-grid">
 
-      <button class="action-btn btn-primary" routerLink="/estudiantes">
+      <button class="action-btn btn-primary" routerLink="/estudiantes"
+        [@buttonAnimation]="{ value: '', params: { delay: 400 } }">
         <i class="fas fa-users"></i>
         <span>Ver Estudiantes</span>
       </button>
 
-      <button class="action-btn btn-success" routerLink="/cursos/catalogo">
+      <button class="action-btn btn-success" (click)="abrirModalCursos()"
+        [@buttonAnimation]="{ value: '', params: { delay: 500 } }">
         <i class="fas fa-book-open"></i>
         <span>Ver Catálogo de Cursos</span>
       </button>
 
-      <button class="action-btn btn-info" (click)="descargarReporte()">
+      <button class="action-btn btn-info" (click)="descargarReporte()"
+        [@buttonAnimation]="{ value: '', params: { delay: 600 } }">
         <i class="fas fa-file-download"></i>
         <span>Descargar Reporte</span>
       </button>
@@ -76,59 +71,11 @@
     </div>
   </div>
 
-  <!-- MODAL DE CURSOS OFICIALES -->
-  <div class="modal-overlay" *ngIf="mostrarModalCursos" (click)="cerrarModalCursos()">
-    <div class="modal-content-cursos" (click)="$event.stopPropagation()">
 
-      <div class="modal-header">
-        <h2>📚 Cursos Oficiales del Sistema Educativo Peruano</h2>
-        <button class="btn-close-modal" (click)="cerrarModalCursos()">
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
-
-      <div class="modal-body">
-
-        <!-- Educación Primaria -->
-        <div class="nivel-educativo">
-          <h3 class="nivel-titulo primaria">
-            <i class="fas fa-child"></i>
-            Educación Primaria
-          </h3>
-          <div class="cursos-grid">
-            <div class="curso-item" *ngFor="let curso of cursosOficiales.primaria">
-              <i class="fas fa-book-open"></i>
-              <span>{{ curso }}</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Educación Secundaria -->
-        <div class="nivel-educativo">
-          <h3 class="nivel-titulo secundaria">
-            <i class="fas fa-user-graduate"></i>
-            Educación Secundaria
-          </h3>
-          <div class="cursos-grid">
-            <div class="curso-item" *ngFor="let curso of cursosOficiales.secundaria">
-              <i class="fas fa-book-open"></i>
-              <span>{{ curso }}</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="modal-footer">
-        <button class="btn btn-primary" (click)="cerrarModalCursos()">Cerrar</button>
-      </div>
-
-    </div>
-  </div>
 
   <!-- MODAL DE DISTRIBUCIÓN POR GRADOS -->
-  <div class="modal-overlay" *ngIf="mostrarModalGrados" (click)="cerrarModalGrados()">
-    <div class="modal-content-grados" (click)="$event.stopPropagation()">
+  <div class="modal-overlay" *ngIf="mostrarModalGrados" (click)="cerrarModalGrados()" [@backdropAnimation]>
+    <div class="modal-content-grados" (click)="$event.stopPropagation()" [@modalAnimation]>
 
       <div class="modal-header">
         <h2>🎓 Distribución de Estudiantes por Grado</h2>
@@ -146,7 +93,7 @@
         </div>
 
         <!-- Lista de grados con estadísticas -->
-        <div class="grados-list" *ngIf="distribucionGrados.length > 0">
+        <div class="grados-list" *ngIf="distribucionGrados.length > 0" [@listAnimation]="distribucionGrados.length">
 
           <div class="grado-item" *ngFor="let item of distribucionGrados">
 
@@ -192,8 +139,8 @@
   </div>
 
   <!-- MODAL DE EDAD PROMEDIO POR NIVEL -->
-  <div class="modal-overlay" *ngIf="mostrarModalEdad" (click)="cerrarModalEdad()">
-    <div class="modal-content-edad" (click)="$event.stopPropagation()">
+  <div class="modal-overlay" *ngIf="mostrarModalEdad" (click)="cerrarModalEdad()" [@backdropAnimation]>
+    <div class="modal-content-edad" (click)="$event.stopPropagation()" [@modalAnimation]>
 
       <div class="modal-header">
         <h2>📊 Promedio de Edad por Nivel Educativo</h2>
@@ -273,8 +220,8 @@
   </div>
 
   <!-- MODAL DE DISTRIBUCIÓN DE ESTUDIANTES -->
-  <div class="modal-overlay" *ngIf="mostrarModalEstudiantes" (click)="cerrarModalEstudiantes()">
-    <div class="modal-content-estudiantes" (click)="$event.stopPropagation()">
+  <div class="modal-overlay" *ngIf="mostrarModalEstudiantes" (click)="cerrarModalEstudiantes()" [@backdropAnimation]>
+    <div class="modal-content-estudiantes" (click)="$event.stopPropagation()" [@modalAnimation]>
 
       <div class="modal-header">
         <h2>🎓 Distribución de Estudiantes por Nivel</h2>
@@ -341,6 +288,85 @@
 
       <div class="modal-footer">
         <button class="btn btn-primary" (click)="cerrarModalEstudiantes()">Cerrar</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODAL DE CATÁLOGO DE CURSOS -->
+  <div class="modal-overlay" *ngIf="mostrarModalCursos" (click)="cerrarModalCursos()" [@backdropAnimation]>
+    <div class="modal-content-cursos" (click)="$event.stopPropagation()" [@modalAnimation]>
+
+      <div class="modal-header">
+        <h2>📚 Catálogo Oficial de Cursos</h2>
+        <button class="btn-close-modal" (click)="cerrarModalCursos()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <div class="modal-body">
+
+        <!-- Educación Primaria -->
+        <div class="nivel-cursos primaria-section">
+          <div class="nivel-titulo">
+            <i class="fas fa-child"></i>
+            <h3>Educación Primaria</h3>
+          </div>
+
+          <div class="areas-principales">
+            <h4>📖 Áreas Curriculares Principales</h4>
+            <div class="cursos-grid">
+              <div class="curso-item principal" *ngFor="let curso of cursosPrimaria.slice(0, 4)">
+                <i class="fas fa-book"></i>
+                <span>{{ curso }}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="areas-complementarias">
+            <h4>🎨 Otras Áreas</h4>
+            <div class="cursos-grid">
+              <div class="curso-item complementaria" *ngFor="let curso of cursosPrimaria.slice(4)">
+                <i class="fas fa-bookmark"></i>
+                <span>{{ curso }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="separador-niveles">
+
+        <!-- Educación Secundaria -->
+        <div class="nivel-cursos secundaria-section">
+          <div class="nivel-titulo">
+            <i class="fas fa-user-graduate"></i>
+            <h3>Educación Secundaria</h3>
+          </div>
+
+          <div class="cursos-grid">
+            <div class="curso-item secundaria" *ngFor="let curso of cursosSecundaria">
+              <i class="fas fa-graduation-cap"></i>
+              <span>{{ curso }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Resumen -->
+        <div class="resumen-cursos">
+          <div class="resumen-item">
+            <i class="fas fa-book-reader"></i>
+            <span>Total Primaria: <strong>{{ cursosPrimaria.length }}</strong> cursos</span>
+          </div>
+          <div class="resumen-item">
+            <i class="fas fa-graduation-cap"></i>
+            <span>Total Secundaria: <strong>{{ cursosSecundaria.length }}</strong> cursos</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-primary" (click)="cerrarModalCursos()">Cerrar</button>
       </div>
 
     </div>

@@ -1,182 +1,48 @@
 <div class="catalogo-container">
 
     <div class="catalogo-header">
-        <h1>📚 Catálogo de Cursos</h1>
-        <p class="subtitle">Explora todos los cursos disponibles por nivel educativo</p>
+        <h1>📚 Cursos Oficiales del Sistema Educativo Peruano</h1>
+        <p class="subtitle">Catálogo completo de cursos por nivel educativo</p>
     </div>
 
     <!-- Tabs para Primaria / Secundaria -->
     <div class="tabs">
         <button class="tab-btn" [class.active]="nivelActivo === 'primaria'" (click)="nivelActivo = 'primaria'">
             <i class="fas fa-child"></i>
-            Primaria
+            Educación Primaria
         </button>
         <button class="tab-btn" [class.active]="nivelActivo === 'secundaria'" (click)="nivelActivo = 'secundaria'">
             <i class="fas fa-user-graduate"></i>
-            Secundaria
+            Educación Secundaria
         </button>
     </div>
 
     <!-- Cursos de Primaria -->
-    <div class="courses-grid" *ngIf="nivelActivo === 'primaria'">
-
-        <div class="course-card card-blue">
-            <div class="course-icon">
-                <i class="fas fa-calculator"></i>
-            </div>
-            <h3>Matemáticas</h3>
-            <p>Números, operaciones y geometría</p>
-        </div>
-
-        <div class="course-card card-green">
-            <div class="course-icon">
-                <i class="fas fa-flask"></i>
-            </div>
-            <h3>Ciencia y Tecnología</h3>
-            <p>Experimentos y descubrimientos</p>
-        </div>
-
-        <div class="course-card card-orange">
-            <div class="course-icon">
+    <div class="nivel-educativo" *ngIf="nivelActivo === 'primaria'">
+        <h3 class="nivel-titulo primaria">
+            <i class="fas fa-child"></i>
+            Educación Primaria
+        </h3>
+        <div class="cursos-grid">
+            <div class="curso-item" *ngFor="let curso of cursosOficiales.primaria">
                 <i class="fas fa-book-open"></i>
+                <span>{{ curso }}</span>
             </div>
-            <h3>Comunicación (Castellano)</h3>
-            <p>Lectura, escritura y expresión</p>
         </div>
-
-        <div class="course-card card-purple">
-            <div class="course-icon">
-                <i class="fas fa-palette"></i>
-            </div>
-            <h3>Arte y Cultura</h3>
-            <p>Creatividad y expresión artística</p>
-        </div>
-
-        <div class="course-card card-red">
-            <div class="course-icon">
-                <i class="fas fa-running"></i>
-            </div>
-            <h3>Educación Física</h3>
-            <p>Deportes y actividad física</p>
-        </div>
-
-        <div class="course-card card-cyan">
-            <div class="course-icon">
-                <i class="fas fa-globe"></i>
-            </div>
-            <h3>Inglés como Lengua Extranjera</h3>
-            <p>Idioma internacional</p>
-        </div>
-
-        <div class="course-card card-yellow">
-            <div class="course-icon">
-                <i class="fas fa-praying-hands"></i>
-            </div>
-            <h3>Educación Religiosa</h3>
-            <p>Valores y espiritualidad</p>
-        </div>
-
     </div>
 
     <!-- Cursos de Secundaria -->
-    <div class="courses-grid" *ngIf="nivelActivo === 'secundaria'">
-
-        <div class="course-card card-blue">
-            <div class="course-icon">
-                <i class="fas fa-square-root-alt"></i>
+    <div class="nivel-educativo" *ngIf="nivelActivo === 'secundaria'">
+        <h3 class="nivel-titulo secundaria">
+            <i class="fas fa-user-graduate"></i>
+            Educación Secundaria
+        </h3>
+        <div class="cursos-grid">
+            <div class="curso-item" *ngFor="let curso of cursosOficiales.secundaria">
+                <i class="fas fa-book-open"></i>
+                <span>{{ curso }}</span>
             </div>
-            <h3>Matemáticas</h3>
-            <p>Álgebra, geometría y cálculo</p>
         </div>
-
-        <div class="course-card card-orange">
-            <div class="course-icon">
-                <i class="fas fa-pen-fancy"></i>
-            </div>
-            <h3>Comunicación</h3>
-            <p>Literatura y redacción</p>
-        </div>
-
-        <div class="course-card card-green">
-            <div class="course-icon">
-                <i class="fas fa-atom"></i>
-            </div>
-            <h3>Ciencia y Tecnología</h3>
-            <p>Física, química y biología</p>
-        </div>
-
-        <div class="course-card card-brown">
-            <div class="course-icon">
-                <i class="fas fa-landmark"></i>
-            </div>
-            <h3>Ciencias Sociales</h3>
-            <p>Historia, geografía y economía</p>
-        </div>
-
-        <div class="course-card card-red">
-            <div class="course-icon">
-                <i class="fas fa-dumbbell"></i>
-            </div>
-            <h3>Educación Física</h3>
-            <p>Deportes y salud</p>
-        </div>
-
-        <div class="course-card card-purple">
-            <div class="course-icon">
-                <i class="fas fa-theater-masks"></i>
-            </div>
-            <h3>Arte y Cultura</h3>
-            <p>Artes visuales y escénicas</p>
-        </div>
-
-        <div class="course-card card-cyan">
-            <div class="course-icon">
-                <i class="fas fa-language"></i>
-            </div>
-            <h3>Inglés</h3>
-            <p>Comunicación internacional</p>
-        </div>
-
-        <div class="course-card card-indigo">
-            <div class="course-icon">
-                <i class="fas fa-tools"></i>
-            </div>
-            <h3>Educación para el Trabajo (EPT)</h3>
-            <p>Habilidades laborales</p>
-        </div>
-
-        <div class="course-card card-teal">
-            <div class="course-icon">
-                <i class="fas fa-balance-scale"></i>
-            </div>
-            <h3>Formación Ciudadana y Cívica</h3>
-            <p>Derechos y deberes</p>
-        </div>
-
-        <div class="course-card card-pink">
-            <div class="course-icon">
-                <i class="fas fa-users"></i>
-            </div>
-            <h3>Persona, Familia y Relaciones Humanas</h3>
-            <p>Desarrollo personal y social</p>
-        </div>
-
-        <div class="course-card card-yellow">
-            <div class="course-icon">
-                <i class="fas fa-cross"></i>
-            </div>
-            <h3>Educación Religiosa</h3>
-            <p>Fe y valores</p>
-        </div>
-
-        <div class="course-card card-gray">
-            <div class="course-icon">
-                <i class="fas fa-compass"></i>
-            </div>
-            <h3>Tutoría y Orientación Educativa</h3>
-            <p>Guía y acompañamiento</p>
-        </div>
-
     </div>
 
 </div>
