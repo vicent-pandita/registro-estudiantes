@@ -8,8 +8,8 @@ import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 
-import { CoreModule } from './core/core.module';   // 👈 IMPORTANTE!
-import { SharedModule } from './shared/shared.module'; // si existe
+import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
 import { environment } from '../environments/environment';
 
 @NgModule({
@@ -21,10 +21,11 @@ import { environment } from '../environments/environment';
     BrowserAnimationsModule,
     AppRoutingModule,
 
-    CoreModule,      // 👈 AGREGA ESTO
-    SharedModule,    // 👈 si lo tienes
+    CoreModule,
+    SharedModule,
 
-    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+    // 🔥 CORRECCIÓN AQUÍ
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore())
   ],

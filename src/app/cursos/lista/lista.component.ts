@@ -15,7 +15,7 @@ export class ListaComponent implements OnInit {
   constructor(
     private cursosService: CursosService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.cursosService.obtenerTodos().subscribe(data => {
@@ -24,10 +24,13 @@ export class ListaComponent implements OnInit {
   }
 
   filtrar() {
+    const term = this.filtro.toLowerCase();
+
     return this.cursos.filter(c =>
-      c.nombre.toLowerCase().includes(this.filtro.toLowerCase())
+      (c.nombre || '').toLowerCase().includes(term)
     );
   }
+
 
   editar(id: string) {
     this.router.navigate(['/cursos/editar', id]);

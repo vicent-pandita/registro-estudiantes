@@ -13,7 +13,7 @@
       <textarea class="form-control" formControlName="descripcion"></textarea>
     </div>
 
-    <button class="btn btn-primary">Guardar</button>
+    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Guardar</button>
     <button type="button" routerLink="/cursos" class="btn btn-secondary ms-2">Cancelar</button>
 
   </form>

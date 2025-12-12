@@ -28,13 +28,15 @@ export class ListaComponent implements OnInit {
 
   filtrar() {
     const term = this.filtro.toLowerCase();
+
     return this.estudiantes.filter(e =>
-      e.nombre.toLowerCase().includes(term) ||
-      e.apellido.toLowerCase().includes(term) ||
-      (e.codigo && e.codigo.toLowerCase().includes(term)) ||
-      (e.dni && e.dni.includes(term))
+      (e.nombre || '').toLowerCase().includes(term) ||
+      (e.apellido || '').toLowerCase().includes(term) ||
+      (e.codigo || '').toLowerCase().includes(term) ||
+      (e.dni || '').toLowerCase().includes(term)
     );
   }
+
 
   descargar() {
     const data = this.filtrar(); // Descargar solo lo filtrado

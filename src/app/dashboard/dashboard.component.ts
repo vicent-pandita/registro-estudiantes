@@ -126,10 +126,14 @@ export class DashboardComponent implements OnInit {
     this.estudiantesService.obtenerTodos().subscribe(list => {
       this.totalEstudiantes = list.length;
 
-      // Calcular promedio de edad
-      if (list.length > 0) {
-        const sumaEdades = list.reduce((sum, e) => sum + e.edad, 0);
-        this.promedioEdad = Math.round(sumaEdades / list.length);
+      // Calcular promedio de edad (evitando NaN)
+      const estudiantesConEdad = list.filter(e => e.edad && !isNaN(Number(e.edad)));
+
+      if (estudiantesConEdad.length > 0) {
+        const sumaEdades = estudiantesConEdad.reduce((sum, e) => sum + Number(e.edad), 0);
+        this.promedioEdad = Math.round(sumaEdades / estudiantesConEdad.length);
+      } else {
+        this.promedioEdad = 0;
       }
 
       // Contar grados únicos y calcular distribución
@@ -203,18 +207,22 @@ export class DashboardComponent implements OnInit {
 
     // Calcular promedio de primaria
     this.totalEstudiantesPrimaria = estudiantesPrimaria.length;
-    if (estudiantesPrimaria.length > 0) {
-      const sumaPrimaria = estudiantesPrimaria.reduce((sum, e) => sum + e.edad, 0);
-      this.promedioEdadPrimaria = Math.round(sumaPrimaria / estudiantesPrimaria.length);
+    const primariaConEdad = estudiantesPrimaria.filter(e => e.edad && !isNaN(Number(e.edad)));
+
+    if (primariaConEdad.length > 0) {
+      const sumaPrimaria = primariaConEdad.reduce((sum, e) => sum + Number(e.edad), 0);
+      this.promedioEdadPrimaria = Math.round(sumaPrimaria / primariaConEdad.length);
     } else {
       this.promedioEdadPrimaria = 0;
     }
 
     // Calcular promedio de secundaria
     this.totalEstudiantesSecundaria = estudiantesSecundaria.length;
-    if (estudiantesSecundaria.length > 0) {
-      const sumaSecundaria = estudiantesSecundaria.reduce((sum, e) => sum + e.edad, 0);
-      this.promedioEdadSecundaria = Math.round(sumaSecundaria / estudiantesSecundaria.length);
+    const secundariaConEdad = estudiantesSecundaria.filter(e => e.edad && !isNaN(Number(e.edad)));
+
+    if (secundariaConEdad.length > 0) {
+      const sumaSecundaria = secundariaConEdad.reduce((sum, e) => sum + Number(e.edad), 0);
+      this.promedioEdadSecundaria = Math.round(sumaSecundaria / secundariaConEdad.length);
     } else {
       this.promedioEdadSecundaria = 0;
     }

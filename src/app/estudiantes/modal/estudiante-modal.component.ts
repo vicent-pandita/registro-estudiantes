@@ -66,7 +66,14 @@ export class EstudianteModalComponent implements OnInit {
     }
 
     filtrarCursosPorGrado(grado: string) {
+
+        if (!grado) {
+            this.cursosFiltrados = [...this.cursosPrimaria, ...this.cursosSecundaria];
+            return;
+        }
+
         const gradoLower = grado.toLowerCase();
+
 
         // Detectar si es primaria o secundaria
         if (gradoLower.includes('primaria') || gradoLower.includes('1ro') ||
