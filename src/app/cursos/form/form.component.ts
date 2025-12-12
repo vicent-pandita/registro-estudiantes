@@ -39,14 +39,24 @@ export class FormComponent implements OnInit {
   }
 
   guardar() {
+    if (this.form.invalid) return;
+
     const curso: Curso = this.form.value as Curso;
 
     if (this.id) {
       this.cursosService.actualizar(this.id, curso)
-        .then(() => this.router.navigate(['/cursos']));
+        .then(() => this.router.navigate(['/cursos']))
+        .catch(error => {
+          console.error("Error al actualizar curso:", error);
+          alert("Error al guardar: " + error.message);
+        });
     } else {
       this.cursosService.crear(curso)
-        .then(() => this.router.navigate(['/cursos']));
+        .then(() => this.router.navigate(['/cursos']))
+        .catch(error => {
+          console.error("Error al crear curso:", error);
+          alert("Error al crear curso: " + error.message);
+        });
     }
   }
 }

@@ -242,6 +242,9 @@ firebase deploy
 ```
 
 ---
+**URL DE MI VIDEO MOSTRANDO SU FUNCIONAMIENTO + EXPLICACION DEL CODIGO:**
+
+🔗 **[https://drive.google.com/drive/folders/105yb18zQjT3n3ZI4nthbEhndJSop0Cp1?usp=drive_link]**
 
 ## 📖 Manual de Usuario
 

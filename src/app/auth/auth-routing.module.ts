@@ -3,13 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 
+import { PublicGuard } from '../guards/public.guard';
+
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent }
+  { path: 'login', component: LoginComponent, canActivate: [PublicGuard] },
+  { path: 'register', component: RegisterComponent, canActivate: [PublicGuard] }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AuthRoutingModule {}
+export class AuthRoutingModule { }

@@ -13,6 +13,7 @@
     <div class="collapse navbar-collapse" id="menu">
       <ul class="navbar-nav">
 
+        <!-- Solo ADMIN ve Dashboard -->
         <li class="nav-item">
           <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">
             <i class="fas fa-chart-pie"></i>
@@ -20,6 +21,7 @@
           </a>
         </li>
 
+        <!-- Cualquier usuario puede ver Estudiantes -->
         <li class="nav-item">
           <a class="nav-link" routerLink="/estudiantes" routerLinkActive="active">
             <i class="fas fa-users"></i>
@@ -27,7 +29,8 @@
           </a>
         </li>
 
-        <li class="nav-item" *ngIf="isAdmin">
+        <!-- Solo ADMIN puede ver cursos -->
+        <li class="nav-item">
           <a class="nav-link" routerLink="/cursos" routerLinkActive="active">
             <i class="fas fa-book"></i>
             <span>Cursos</span>

@@ -9,18 +9,22 @@ import { AuthService } from '../../auth/auth.service';
 })
 export class NavbarComponent implements OnInit {
 
-  user: any = null;  // 🔹 aquí guardamos el usuario con su rol
+  user: any = null;  // Guarda email + role
 
   constructor(
     private authService: AuthService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
-    this.authService.user$.subscribe(u => this.user = u);
+    // 🟢 Mantener usuario actualizado
+    this.authService.user$.subscribe(u => {
+      this.user = u;
+      console.log("Usuario logeado:", u);
+    });
   }
 
-  // 🔹 Saber si es admin
+  // 🟢 Solo será admin si role === 'admin'
   get isAdmin() {
     return this.user?.role === 'admin';
   }
